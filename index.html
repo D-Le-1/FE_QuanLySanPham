@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ComacPro - Quản lý thiết bị</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <div
+        class="container-fluid mx-3 mx-lg-5 mx-xl-5 mx-xxl-5"
+        class="d-flex justify-content-between align-items-center"
+      >
+        <a class="navbar-brand" href="#">
+          <img
+            style="width: 230px; height: 26px"
+            src="7408a97c5065b658abc48a7dc25e86e6bcf93d52.png"
+            alt=""
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('ban')">Bán</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('cho-thue')"
+                >Cho thuê</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('danh-muc')"
+                >Danh mục</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('blogs')"
+                >Blogs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('faq')">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('ve-chung-toi')"
+                >Về chúng tôi</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex gap-2">
+            <button
+              class="btn me-2 text-black align-items-center d-flex gap-2 fw-semibold"
+              style="background-color: #ffa21a"
+              data-bs-toggle="modal"
+              data-bs-target="#addDeviceModal"
+            >
+              <svg
+                width="25"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.28906 6.29C7.86906 6.29 7.53906 5.95 7.53906 5.54V2.75C7.53906 2.34 7.86906 2 8.28906 2C8.70906 2 9.03906 2.34 9.03906 2.75V5.53C9.03906 5.95 8.70906 6.29 8.28906 6.29Z"
+                  fill="#2C2A29"
+                />
+                <path
+                  d="M15.7109 6.29C15.2909 6.29 14.9609 5.95 14.9609 5.54V2.75C14.9609 2.33 15.3009 2 15.7109 2C16.1309 2 16.4609 2.34 16.4609 2.75V5.53C16.4609 5.95 16.1309 6.29 15.7109 6.29Z"
+                  fill="#2C2A29"
+                />
+                <path
+                  d="M19.57 4.5C18.91 4.01 17.96 4.48 17.96 5.31V5.41C17.96 6.58 17.12 7.66 15.95 7.78C14.6 7.92 13.46 6.86 13.46 5.54V4.5C13.46 3.95 13.01 3.5 12.46 3.5H11.54C10.99 3.5 10.54 3.95 10.54 4.5V5.54C10.54 6.33 10.13 7.03 9.51 7.42C9.42 7.48 9.32 7.53 9.22 7.58C9.13 7.63 9.03 7.67 8.92 7.7C8.8 7.74 8.67 7.77 8.53 7.78C8.37 7.8 8.21 7.8 8.05 7.78C7.91 7.77 7.78 7.74 7.66 7.7C7.56 7.67 7.46 7.63 7.36 7.58C7.26 7.53 7.16 7.48 7.07 7.42C6.44 6.98 6.04 6.22 6.04 5.41V5.31C6.04 4.54 5.22 4.08 4.57 4.41C4.56 4.42 4.55 4.42 4.54 4.43C4.5 4.45 4.47 4.47 4.43 4.5C4.4 4.53 4.36 4.55 4.33 4.58C4.05 4.8 3.8 5.05 3.59 5.32C3.48 5.44 3.39 5.57 3.31 5.7C3.3 5.71 3.29 5.72 3.28 5.74C3.19 5.87 3.11 6.02 3.04 6.16C3.02 6.18 3.01 6.19 3.01 6.21C2.95 6.33 2.89 6.45 2.85 6.58C2.82 6.63 2.81 6.67 2.79 6.72C2.73 6.87 2.69 7.02 2.65 7.17C2.61 7.31 2.58 7.46 2.56 7.61C2.54 7.72 2.53 7.83 2.52 7.95C2.51 8.09 2.5 8.23 2.5 8.37V17.13C2.5 19.82 4.68 22 7.37 22H16.63C19.32 22 21.5 19.82 21.5 17.13V8.37C21.5 6.78 20.74 5.39 19.57 4.5ZM12 16.25H10.31V18C10.31 18.41 9.97 18.75 9.56 18.75C9.14 18.75 8.81 18.41 8.81 18V16.25H7C6.59 16.25 6.25 15.91 6.25 15.5C6.25 15.09 6.59 14.75 7 14.75H8.81V13C8.81 12.59 9.14 12.25 9.56 12.25C9.97 12.25 10.31 12.59 10.31 13V14.75H12C12.41 14.75 12.75 15.09 12.75 15.5C12.75 15.91 12.41 16.25 12 16.25Z"
+                  fill="#2C2A29"
+                />
+              </svg>
+              Đăng sản phẩm
+            </button>
+            <div class="dropdown">
+              <button
+                class="btn"
+                style="background-color: #ffa21a"
+                type="button"
+                aria-expanded="false"
+              >
+                <svg
+                  width="25"
+                  height="24"
+                  viewBox="0 0 25 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20.0119 5.85L14.0719 2.42C13.1019 1.86 11.9019 1.86 10.9219 2.42L4.99187 5.85C4.02187 6.41 3.42188 7.45 3.42188 8.58V15.42C3.42188 16.54 4.02187 17.58 4.99187 18.15L10.9319 21.58C11.9019 22.14 13.1019 22.14 14.0819 21.58L20.0219 18.15C20.9919 17.59 21.5919 16.55 21.5919 15.42V8.58C21.5819 7.45 20.9819 6.42 20.0119 5.85ZM12.5019 7.34C13.7919 7.34 14.8319 8.38 14.8319 9.67C14.8319 10.96 13.7919 12 12.5019 12C11.2119 12 10.1719 10.96 10.1719 9.67C10.1719 8.39 11.2119 7.34 12.5019 7.34ZM15.1819 16.66H9.82187C9.01187 16.66 8.54187 15.76 8.99187 15.09C9.67187 14.08 10.9919 13.4 12.5019 13.4C14.0119 13.4 15.3319 14.08 16.0119 15.09C16.4619 15.75 15.9819 16.66 15.1819 16.66Z"
+                    fill="#2C2A29"
+                  />
+                </svg>
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="userDropdown"
+              >
+                <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- User Profile Section -->
+    <div class="user-profile">
+      <div
+        class="container-fluid position-relative mx-3 mx-lg-5 mx-xl-5 mx-xxl-5"
+      >
+        <div class="d-flex align-items-center justify-content-between">
+          <!-- Avatar và lời chào -->
+          <div class="d-flex align-items-center gap-3">
+            <div class="user-avatar">TN</div>
+            <div>
+              <h2 class="mb-0">
+                <span class="fs-5">Xin chào</span> <br />
+                <strong>Trung Nguyên</strong>
+              </h2>
+            </div>
+          </div>
+
+          <!-- Ảnh nằm ở góc phải dưới -->
+          <img
+            src="anhbg-removebg-preview.png"
+            class="bottom-right-img"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="navbar navbar-expand-lg nav-bottom">
+      <div class="fs-6 container-fluid mx-3 mx-lg-5 mx-xl-5 mx-xxl-5">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('dashboard')"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              onclick="showSection('thiet-bi-cho-thue')"
+              >Thiết bị cho thuê</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              href="#"
+              onclick="showSection('thiet-bi-ban')"
+              >Thiết bị bán</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('don-hang')"
+              >Đơn hàng</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('inbox')"
+              >Inbox</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('ho-so')"
+              >Hồ sơ</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+      <!-- Controls Section -->
+      <div class="controls-section mx-3 mx-lg-5 mx-xl-5 mx-xxl-5">
+        <div
+          class="d-flex justify-content-between align-items-center flex-wrap gap-3"
+        >
+          <div class="d-flex align-items-center gap-3">
+            <div class="vertical-bar d-none d-sm-block"></div>
+            <h3 class="mb-0 fs-3 fw-bold">Danh sách thiết bị bán</h3>
+          </div>
+          <div class="d-flex gap-2">
+            <div class="position-relative" style="width: fit-content">
+              <span
+                class="position-absolute start-0 top-50 translate-middle-y ps-2"
+              >
+                <!-- SVG của bạn -->
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.37891 12L10.7889 14.42L15.6189 9.57999"
+                    stroke="#2C2A29"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.7489 2.45001C11.4389 1.86001 12.5689 1.86001 13.2689 2.45001L14.8489 3.81001C15.1489 4.07001 15.7089 4.28001 16.1089 4.28001H17.8089C18.8689 4.28001 19.7389 5.15001 19.7389 6.21001V7.91001C19.7389 8.30001 19.9489 8.87001 20.2089 9.17001L21.5689 10.75C22.1589 11.44 22.1589 12.57 21.5689 13.27L20.2089 14.85C19.9489 15.15 19.7389 15.71 19.7389 16.11V17.81C19.7389 18.87 18.8689 19.74 17.8089 19.74H16.1089C15.7189 19.74 15.1489 19.95 14.8489 20.21L13.2689 21.57C12.5789 22.16 11.4489 22.16 10.7489 21.57L9.16891 20.21C8.86891 19.95 8.30891 19.74 7.90891 19.74H6.17891C5.11891 19.74 4.24891 18.87 4.24891 17.81V16.1C4.24891 15.71 4.03891 15.15 3.78891 14.85L2.43891 13.26C1.85891 12.57 1.85891 11.45 2.43891 10.76L3.78891 9.17001C4.03891 8.87001 4.24891 8.31001 4.24891 7.92001V6.20001C4.24891 5.14001 5.11891 4.27001 6.17891 4.27001H7.90891C8.29891 4.27001 8.86891 4.06001 9.16891 3.80001L10.7489 2.45001Z"
+                    stroke="#2C2A29"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <select
+                class="form-select ps-5"
+                style="width: auto"
+                onchange="filterDevices(this.value)"
+              >
+                <option value="">Tất cả</option>
+                <option value="available">Có sẵn</option>
+                <option value="sold">Đã bán</option>
+                <option value="maintenance">Bảo trì</option>
+              </select>
+            </div>
+
+            <div
+              class="input-group h-auto"
+              style="border: 1px solid #bcb6b2; border-radius: 5px"
+            >
+              <span
+                style="
+                  border: 0;
+                  background-color: transparent;
+                  font-size: 1.3rem;
+                "
+                class="input-group-text"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                style="border: 0; padding: 5px"
+                class="form-control search-input"
+                type="text"
+                placeholder="Tìm kiếm thiết bị..."
+                onkeyup="searchDevices(this.value)"
+              />
+            </div>
+            <button
+              class="btn me-2 w-75 text-black align-items-center d-flex gap-2 fw-semibold"
+              style="background-color: #ffa21a"
+              data-bs-toggle="modal"
+              data-bs-target="#addDeviceModal"
+            >
+              <svg
+                width="25"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.28906 6.29C7.86906 6.29 7.53906 5.95 7.53906 5.54V2.75C7.53906 2.34 7.86906 2 8.28906 2C8.70906 2 9.03906 2.34 9.03906 2.75V5.53C9.03906 5.95 8.70906 6.29 8.28906 6.29Z"
+                  fill="#2C2A29"
+                />
+                <path
+                  d="M15.7109 6.29C15.2909 6.29 14.9609 5.95 14.9609 5.54V2.75C14.9609 2.33 15.3009 2 15.7109 2C16.1309 2 16.4609 2.34 16.4609 2.75V5.53C16.4609 5.95 16.1309 6.29 15.7109 6.29Z"
+                  fill="#2C2A29"
+                />
+                <path
+                  d="M19.57 4.5C18.91 4.01 17.96 4.48 17.96 5.31V5.41C17.96 6.58 17.12 7.66 15.95 7.78C14.6 7.92 13.46 6.86 13.46 5.54V4.5C13.46 3.95 13.01 3.5 12.46 3.5H11.54C10.99 3.5 10.54 3.95 10.54 4.5V5.54C10.54 6.33 10.13 7.03 9.51 7.42C9.42 7.48 9.32 7.53 9.22 7.58C9.13 7.63 9.03 7.67 8.92 7.7C8.8 7.74 8.67 7.77 8.53 7.78C8.37 7.8 8.21 7.8 8.05 7.78C7.91 7.77 7.78 7.74 7.66 7.7C7.56 7.67 7.46 7.63 7.36 7.58C7.26 7.53 7.16 7.48 7.07 7.42C6.44 6.98 6.04 6.22 6.04 5.41V5.31C6.04 4.54 5.22 4.08 4.57 4.41C4.56 4.42 4.55 4.42 4.54 4.43C4.5 4.45 4.47 4.47 4.43 4.5C4.4 4.53 4.36 4.55 4.33 4.58C4.05 4.8 3.8 5.05 3.59 5.32C3.48 5.44 3.39 5.57 3.31 5.7C3.3 5.71 3.29 5.72 3.28 5.74C3.19 5.87 3.11 6.02 3.04 6.16C3.02 6.18 3.01 6.19 3.01 6.21C2.95 6.33 2.89 6.45 2.85 6.58C2.82 6.63 2.81 6.67 2.79 6.72C2.73 6.87 2.69 7.02 2.65 7.17C2.61 7.31 2.58 7.46 2.56 7.61C2.54 7.72 2.53 7.83 2.52 7.95C2.51 8.09 2.5 8.23 2.5 8.37V17.13C2.5 19.82 4.68 22 7.37 22H16.63C19.32 22 21.5 19.82 21.5 17.13V8.37C21.5 6.78 20.74 5.39 19.57 4.5ZM12 16.25H10.31V18C10.31 18.41 9.97 18.75 9.56 18.75C9.14 18.75 8.81 18.41 8.81 18V16.25H7C6.59 16.25 6.25 15.91 6.25 15.5C6.25 15.09 6.59 14.75 7 14.75H8.81V13C8.81 12.59 9.14 12.25 9.56 12.25C9.97 12.25 10.31 12.59 10.31 13V14.75H12C12.41 14.75 12.75 15.09 12.75 15.5C12.75 15.91 12.41 16.25 12 16.25Z"
+                  fill="#2C2A29"
+                />
+              </svg>
+              Đăng sản phẩm
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <nav
+        class="navbar navbar-expand-lg navbar-light"
+        style="margin-bottom: 10px"
+      >
+        <div class="container-fluid mx-3 mx-lg-5 mx-xl-5 mx-xxl-5">
+          <ul class="navbar-nav nav-2">
+            <li class="nav-item">
+              <a class="nav-link-2 active" href="#">Sản phẩm đang bán</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-2" href="#">Sản phẩm chờ duyệt</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-2" href="#">Sản phẩm nháp</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Device Table -->
+      <div class="table-responsive mx-3 mx-lg-5 mx-xl-5 mx-xxl-5">
+        <table class="table table-hover text-center" border="0">
+          <thead class="justify-content-center align-items-center">
+            <tr class="fs-6 text-center align-middle">
+              <th>#</th>
+              <th>Mã thiết bị</th>
+              <th>Ảnh</th>
+              <th>Trạng thái</th>
+              <th>Danh mục</th>
+              <th>Model</th>
+              <th>Brand</th>
+              <th>Serial</th>
+              <th>Năm sản xuất</th>
+              <th>Giá bán</th>
+              <th>Tiêu đề</th>
+              <th>Mô tả</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+          <tbody id="deviceTableBody">
+            <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <nav class="responsive-logo-bar">
+      <div class="container-fluid mx-3 mx-lg-5 mx-xl-5 mx-xxl-5">
+        <img src="dddaca5b1334c1c45097384f1646e9e936a8dffe.png" alt="" />
+        <img src="dddaca5b1334c1c45097384f1646e9e936a8dffe.png" alt="" />
+        <img src="8c3be0953e1ff1654b88af4a5c6c8823987521f9.png" alt="" />
+        <img src="df96a46b00854acfd0c359ae43e1ff357121b04d.png" alt="" />
+      </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row d-flex justify-content-between text-black mx-3 mx-lg-">
+          <!-- Cột logo + mô tả -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <img
+              src="7408a97c5065b658abc48a7dc25e86e6bcf93d52.png"
+              alt="ComacPro Logo"
+              class="mb-3"
+              style="width: 238px; height: 27px"
+            />
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Integer enim dolor nunc
+              consequat elit nec in. Commodo luctus tellus viverra aliquam ut
+              feugiat dignissim. Odio volutpat sed laoreet dignissim ornare
+              pharetra. Elementum diam et sit hendrerit
+            </p>
+          </div>
+
+          <div class="col-lg-1 d-none d-lg-block"></div>
+
+          <!-- Người dùng & Đối tác -->
+          <div class="col-lg-2 col-md-6 mb-4">
+            <div class="d-flex flex-column gap-3">
+              <div>
+                <h6 class="fw-semibold mb-2">Người dùng</h6>
+                <ul class="list-unstyled d-flex flex-column gap-1">
+                  <li><a class="text-black" href="#">FAQs</a></li>
+                  <li><a class="text-black" href="#">Hướng dẫn thuê</a></li>
+                  <li><a class="text-black" href="#">Hướng dẫn mua</a></li>
+                </ul>
+              </div>
+              <div>
+                <h6 class="fw-semibold mb-2">Đối tác</h6>
+                <ul class="list-unstyled d-flex flex-column gap-1">
+                  <li><a class="text-black" href="#">FAQs</a></li>
+                  <li><a class="text-black" href="#">Trở thành đối tác</a></li>
+                  <li><a class="text-black" href="#">Hướng dẫn bán</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Truy cập nhanh -->
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="fw-semibold mb-2">Truy cập nhanh</h6>
+            <ul class="list-unstyled d-flex flex-column gap-1">
+              <li><a class="text-black" href="">Đăng ký</a></li>
+              <li><a class="text-black" href="">Về chúng tôi</a></li>
+              <li><a class="text-black" href="">Sản phẩm</a></li>
+              <li><a class="text-black" href="">Blogs</a></li>
+              <li><a class="text-black" href="">Bảo hiểm</a></li>
+              <li><a class="text-black" href="">Điều kiện</a></li>
+              <li><a class="text-black" href="">FAQs</a></li>
+            </ul>
+          </div>
+
+          <!-- Liên hệ -->
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="fw-semibold mb-2">Liên hệ</h6>
+            <p class="mb-md-4">
+              Lorem ipsum dolor sit amet consectetur. Vitae nulla amet sed
+              tortor orci quis tellus.
+            </p>
+            <h6 class="fw-semibold mb-1">Hotline</h6>
+            <p class="mb-0">+84 123 456 789</p>
+          </div>
+
+          <!-- Mạng xã hội + Email -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="mb-5">
+              <h6 class="fw-semibold pb-1">Mạng xã hội</h6>
+              <div class="gap-3 d-flex">
+                <a href="#"
+                  ><i style="color: black" class="fab fa-facebook-f fa-lg"></i
+                ></a>
+                <a href="#"
+                  ><i style="color: black" class="fab fa-youtube fa-lg"></i
+                ></a>
+                <a href="#"
+                  ><i style="color: black" class="fab fa-linkedin fa-lg"></i
+                ></a>
+                <a href="#"
+                  ><i style="color: black" class="fab fa-instagram fa-lg"></i
+                ></a>
+                <a href="#"
+                  ><i style="color: black" class="fab fa-twitter fa-lg"></i
+                ></a>
+              </div>
+            </div>
+            <div class="pt-3">
+              <h6 class="fw-semibold mb-1">Email</h6>
+              <p class="mb-0">info@comacpro.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <p class="mb-0">© 2024 ComacPro. Ltd. All Rights Reserved</p>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
