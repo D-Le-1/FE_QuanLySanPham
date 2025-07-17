@@ -163,6 +163,33 @@ function renderDevices() {
   });
 }
 
+document.querySelectorAll(".navbar-collapse .nav-link").forEach((link) => {
+  link.addEventListener("click", function () {
+    document
+      .querySelectorAll(".navbar-collapse .nav-link")
+      .forEach((l) => l.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
+document.querySelectorAll(".nav-bottom .nav-link").forEach((link) => {
+  link.addEventListener("click", function () {
+    document
+      .querySelectorAll(".nav-bottom .nav-link")
+      .forEach((l) => l.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
+document.querySelectorAll(".nav-link-2").forEach((link) => {
+  link.addEventListener("click", function () {
+    document
+      .querySelectorAll(".nav-link-2")
+      .forEach((l) => l.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
 function formatPrice(price) {
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",

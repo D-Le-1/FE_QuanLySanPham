@@ -22,6 +22,17 @@
   border-radius: 10px;
 }
 
+.navbar-collapse .nav-link.active {
+  background-color: #ffefd5 !important;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.navbar-collapse .nav-link.active::after {
+  background-color: #ffefd5;
+  transform: scaleX(1);
+}
+
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
